@@ -60,8 +60,18 @@ int main(int argc, char **argv) {
    }
    //std::cout << "Client connected\n";
   // 
+  char buffer[1024];
   std:: string response = "+PONG\r\n";
+  while (true) {
+    int bytes_received = recv(client_fd, buffer, sizeof(buffer), 0);
+    if (bytes_received <= 0) {
+      std::cerr << "recv failed\n";
+      break;
+    } 
+    
+    // Send a simple PONG response for any command received
   send(client_fd, response.c_str(), response.length(), 0);
+  }
   close(client_fd);
    close(server_fd);
 
