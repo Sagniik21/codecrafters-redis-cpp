@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
   // Uncomment the code below to pass the first stage
   // 
-   accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
+   //accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
    int client_fd = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
    if (client_fd < 0) {
      std::cerr << "accept failed\n";
@@ -60,8 +60,8 @@ int main(int argc, char **argv) {
    }
    //std::cout << "Client connected\n";
   // 
-  const char *response = "+PONG\r\n";
-  send(client_fd, response, strlen(response), 0);
+  std:: string response = "+PONG\r\n";
+  send(client_fd, response.c_str(), response.length(), 0);
   close(client_fd);
    close(server_fd);
 
